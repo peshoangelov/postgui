@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: peshoangelov/postgui
+  repository: peshoangelov/postgui-rest
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.1"
@@ -80,9 +80,11 @@ tolerations: []
 
 affinity: {}
 
-database:
-  host: 139.59.133.43
-  name: dvdrental
-  username: dvdrental
-  password: dvdrental
-  port: 5432
+postgrestUrl: "http://139.59.133.43:3001"
+
+#database:
+#  host: 139.59.133.43
+#  name: dvdrental
+#  username: dvdrental
+#  password: dvdrental
+#  port: 5432

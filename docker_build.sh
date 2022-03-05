@@ -10,9 +10,9 @@ log() {
 }
 
 #create directories
-for dir in postgrest PostGUI; do
-   mkdir -p $dir
-done
+#for dir in PostGUI; do
+#   mkdir -p $dir
+#done
 #install binaries
 if [ ! -x /usr/bin/wget ]; then
    yum install -y wget
@@ -35,12 +35,12 @@ if [ ! -x /usr/bin/docker ]; then
 fi
  
 #fetch required binaries
-wget -q https://github.com/PostgREST/postgrest/releases/download/v0.4.4.0/postgrest-v0.4.4.0-centos7.tar.xz -O - | tar Jxf - -C postgrest/
-if [ $? -ne 0 ]; then
-    log "ERROR" "Cannot download postgrest"
-else
-    log "INFO" "Downloaded postgres"
-fi
+#wget -q https://github.com/PostgREST/postgrest/releases/download/v0.4.4.0/postgrest-v0.4.4.0-centos7.tar.xz -O - | tar Jxf - -C postgrest/
+#if [ $? -ne 0 ]; then
+#    log "ERROR" "Cannot download postgrest"
+#else
+#    log "INFO" "Downloaded postgres"
+#fi
 
 #fetch app
 git clone https://github.com/priyank-purohit/PostGUI.git &>/dev/null
@@ -53,4 +53,4 @@ fi
 #Clean git before packaging
 rm -rf ./PostGUI/.git
 
-docker build -t postgui:0.2 .
+docker build -t postgui-rest:0.2 .

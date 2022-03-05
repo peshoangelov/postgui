@@ -3,12 +3,38 @@ kind: ConfigMap
 metadata:
   name: postgrest-configmap
 data:
-  db.conf: |
-    db-uri = "postgres://{{ .Values.database.username }}:{{ .Values.database.password }}@{{ .Values.database.host }}:{{ .Values.database.port }}/{{ .Values.database.name }}"
-    db-schema = "public"
-    db-anon-role = "{{ .Values.database.username }}"
-    db-pool = 10
-    server-host = "*4"
-    server-port = 3001
+  config.json: |    
+    {
+      "databases": [
+        {
+          "title": "DVD Rentals",
+          "url": "{{ .Values.postgrestUrl }}",
+          "publicDbAcessType": "read",
+          "foreignKeySearch": true,
+          "primaryKeyFunction": true,
+          "regexSupport": false
+        }
+      ],
+      "logoUrl": null,
+      "seq_column_names": [
+        "alignment_sequence",
+        "nucleotide_sequence",
+        "aminoacid_sequence",
+        "nucleotide_seq",
+        "amino_acid_seq",
+        "nuc_seq",
+        "aa_seq",
+        "dna_seq",
+        "protein_seq",
+        "prot_seq",
+        "n_seq",
+        "p_seq",
+        "a_seq",
+        "seq",
+        "sequence"
+      ],
+      "errorMsg": "ERROR"
+    }
+
 
 

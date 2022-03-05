@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: posgrest-configmap
+data:
+  db.conf |
+    db-uri = "postgres://{{ .Values.database.username }}:{{ .Values.database.password }}@{{ .Values.database.host }}:{{ .Values.database.port }}/{{ .Values.database.name }}"
+    db-schema = "public"
+    db-anon-role = "{{ .Values.database.username }}"
+    db-pool = 10
+    server-host = "*4"
+    server-port = 3001
+
+

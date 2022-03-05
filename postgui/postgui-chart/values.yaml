@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: peshoangelov/postgui
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.1"
 
@@ -61,8 +61,8 @@ resources:
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-   limits:
-     memory: 2048Gi
+  # limits:
+  #   memory: 2048Gi
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
@@ -82,7 +82,7 @@ affinity: {}
 
 database:
   host: 139.59.133.43
-  name: dvdrentals
-  username: dvdrentals
-  password: dvdrentals
+  name: dvdrental
+  username: dvdrental
+  password: dvdrental
   port: 5432

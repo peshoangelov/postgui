@@ -57,5 +57,15 @@ spec:
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
+    - host: postgrest.mtravel.bg
+      http:
+        paths:
+          - backend:
+              service:
+                name: postgrest
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix
     {{- end }}
 {{- end }}

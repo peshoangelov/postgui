@@ -7,8 +7,16 @@ data:
     {
       "databases": [
         {
-          "title": "DVD Rentals",
-          "url": "{{ .Values.postgrestUrl }}",
+          "title": "InternalDB",
+          "url": "{{ .Values.postgrestUrl.internalDB }}",
+          "publicDbAcessType": "read",
+          "foreignKeySearch": true,
+          "primaryKeyFunction": true,
+          "regexSupport": false
+        },
+        {   
+          "title": "PublicDB",
+          "url": "{{ .Values.postgrestUrl.externalDB }}",
           "publicDbAcessType": "read",
           "foreignKeySearch": true,
           "primaryKeyFunction": true,

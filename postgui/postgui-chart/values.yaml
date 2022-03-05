@@ -80,7 +80,9 @@ tolerations: []
 
 affinity: {}
 
-postgrestUrl: "http://139.59.133.43:3001"
+postgrestUrl:
+  externalDB: "http://139.59.133.43:3001"
+  internalDB: "http://postgrest.mtravel.bg"
 
 #database:
 #  host: 139.59.133.43
@@ -88,3 +90,21 @@ postgrestUrl: "http://139.59.133.43:3001"
 #  username: dvdrental
 #  password: dvdrental
 #  port: 5432
+
+postgrest:
+  image:
+    repository: postgrest/postgrest
+    tag: latest
+    imagePullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 3000
+
+postgres:
+  image:
+    repository: aa8y/postgres-dataset
+    tag: dellstore
+    imagePullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 5432

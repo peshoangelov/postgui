@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "postgrest"
+  labels:
+    app.kubernetes.io/instance: postgrest
+    app.kubernetes.io/name: postgrest
+    app.kubernetes.io/version: 9.0.0
+    helm.sh/chart: postgui-0.1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: postgrest
+      app.kubernetes.io/name: postgrest
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: postgrest
+        app.kubernetes.io/name: postgrest
+    spec:
+      containers:
+        - name: postgrest
+          image: "{{ .Values.postgrest.image.repository }}:{{ .Values.postgrest.image.tag }}"
+          imagePullPolicy: {{ .Values.postgrest.image.pullPolicy }}
+          stdin: true
+          env:
+            - name: PGRST_DB_URI
+              value: "postgres://postgres:postgres@postgres:5432/dellstore"
+            - name: PGRST_DB_SCHEMA
+              value: "public"
+            - name: PGRST_DB_ANON_ROLE
+              value: "postgres"
+          tty: true
+          ports:
+            - name: http
+              containerPort: {{ .Values.postgrest.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+          resources: {}

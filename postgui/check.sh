@@ -10,10 +10,12 @@ get_pod_status() {
 pod_status=$(get_pod_status postgui)
 
 if [ ${pod_status} == "Running" ]; then
+   printf "Successfully started\n"
    while [ $counter -gt 0 ]; do
        sleep 5s
        if [ $(get_pod_status postgui) == "Running" ]; then
           ((counter--))
+          printf "Successfully started\n"
        else
           printf "Container unstable, exiting\n"
           exit 2

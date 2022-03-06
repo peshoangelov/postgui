@@ -53,4 +53,10 @@ fi
 #Clean git before packaging
 rm -rf ./PostGUI/.git
 
-docker build -t postgui-rest:0.2 .
+set -e
+
+IMAGE_TAG=$1
+
+docker build -t postgui-rest:${IMAGE_TAG} .
+docker tag postgui-rest:{$IMAGE_TAG} docker.io/peshoangelov/postgui-rest:${IMAGE_TAG}
+docker push docker.io/peshoangelov/postgui-rest:${IMAGE_TAG}
